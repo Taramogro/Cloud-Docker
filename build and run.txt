@@ -1,0 +1,16 @@
+# Build the training container
+docker build -t train-container -f Dockerfile.train .
+
+# Build the prediction container
+docker build -t predict-container -f Dockerfile.predict .
+
+# Run the training container
+docker run --rm -v shared_data:/data train-container
+    - Prints:
+        - Model trained and saved to /data/model.pkl
+
+# Run the training container
+docker run --rm -v shared_data:/data predict-container
+    - Prints:
+        - Model accuracy (R^2 score): 0.34
+        - Plot saved to /data/predictions.png
